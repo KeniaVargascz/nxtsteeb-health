@@ -64,8 +64,9 @@ function Rest(props: any) {
         const headers = getHeaders();
         const { onClose, selectedValue, open } = event;
         const [name, setname] = React.useState('');
+        const [logo, setlogo] = React.useState('');
         const [descrip, setdescrip] = React.useState('');
-        const [food_type, setfood_type] = React.useState('');
+        const [imgSrc, setimgSrc] = React.useState('');
         const [auxFood, setauxFood] = React.useState(['elemento']);
         const selectFood =(e: any, option: any, i: any)=>{
             let foodArr = [...auxFood];
@@ -98,13 +99,14 @@ function Rest(props: any) {
         }
         const addRest = () =>{
             setopenAlert(false);
-            if(name === '' || descrip === '' || auxFood.includes('')){
+            if(name === '' || descrip === '' || auxFood.includes('') || logo === null){
                 setopenAlert(true)
             } else {
             axios.post('https://tellurium.behuns.com/api/restaurants/',{
                 name: name,
-                descrip: descrip,
-                food_type: toIDS(auxFood)
+                description: descrip,
+                food_type: toIDS(auxFood),
+                //logo: logo
             }, {headers
             }).then(response => {
                 handleClose(); 
@@ -119,7 +121,10 @@ function Rest(props: any) {
               onClose(selectedValue);
               setopenAlert(false);
             };
-        
+        const onFileChange =(ed: any)=>{
+           setlogo(ed.target.files[0].name)
+            
+        }
             return (
               <Dialog onClose={handleClose} open={open}>
                   {openAlert ?
@@ -146,7 +151,7 @@ function Rest(props: any) {
                         type="text" 
                         value={descrip} >
                     </TextField>
-                    <Typography variant="h5" style={{ fontSize: 20, marginBottom: 10, marginLeft:5 }}>
+                    <Typography variant="h5" style={{ fontSize: 20, marginBottom: 10, marginLeft:10 }}>
                         {props.t.food_types}
                     
                     
@@ -192,8 +197,22 @@ function Rest(props: any) {
                     </TextField>
                    
                   </Box>
+                  {/* <input 
+                        ref="file" 
+                        type="file" 
+                        name="user[image]" 
+                        onChange={(e) => onFileChange(e)}/> */}
+
+                    {/* <img src={imgSrc} /> */}
+                  <input 
+                  style={{marginTop: 10, marginLeft: 10, marginRight: 10}}
+                  type="file" 
+                  onChange={(e) => onFileChange(e)} 
+                />
                   </Grid>
                   
+                
+              
                   </React.Fragment>
                     ))}
                     <div style={{marginBottom: 10, marginTop: 10}}>

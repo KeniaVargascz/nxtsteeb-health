@@ -18,6 +18,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem';
+import IMG from '@material-ui/core/ImageListItem';
 
 function RestInfo(props: any) {
   const [edit, setedit] = React.useState(false);
@@ -185,14 +186,14 @@ function RestInfo(props: any) {
         <BackIcon fontSize="small" />
     </Button>
         <React.Fragment>
-        {/* <Paper 
-              elevation={3} 
+        <Paper 
+              elevation={2} 
               style={{
                 display: 'block', 
                 marginLeft: 10,
                 marginRight: 10,
                 height: '100%',
-                width: '50%'}} > */}
+                width: '100%'}} >
           <div style={{marginTop: 10, marginBottom: 10}}>
             <Grid item xs={12} style={{ paddingBottom: 0 }}>
               <Box display="flex" >
@@ -221,7 +222,7 @@ function RestInfo(props: any) {
                      variant="h5" style={{marginLeft: 10, marginTop: 10, marginBottom: 10, fontSize: 38}}>
                       {restName}
                     </Typography>
-                    
+                   
                     <Button 
                       style={{ marginRight:10, marginTop: 10, marginBottom: 10, marginLeft:10, height: 30, background: '#F0F8FF'}} 
                       onClick={() => setedit(true)}
@@ -238,6 +239,7 @@ function RestInfo(props: any) {
                 </Button>
                
               </Box>
+              <img src={props.RestGeneralInfo.logo} style={{width: 300, marginLeft: 10}} />
               <Typography
                 variant="h5" style={{marginLeft: 10, marginTop: 10, marginBottom: 10, fontSize: 15}}>
                   {props.t.ranting}: {Math.trunc(props.RestGeneralInfo.rating)}
@@ -270,9 +272,21 @@ function RestInfo(props: any) {
         </TextField>
         </div>
           }
-        {/* </Paper> */}
+        </Paper>
         <div >
-        {
+          
+        {props.RestGeneralInfo.food_type.length === 0 ? 
+          <Paper 
+          elevation={2} 
+          style={{
+            textAlign: 'center',
+          marginLeft: 10,
+          display:'inline-block',
+          width: '10%',
+          }} > 
+            {props.t.noFoods}
+          </Paper>  : ''}
+       {
         FOOD.map((option: any, index: any) => (                            
               <Paper 
                 elevation={2} 
@@ -328,17 +342,7 @@ function RestInfo(props: any) {
         ))}
         
         </div>
-        {/* <div style={{ height: 350, width: '100%' }}>
-          <DataGrid
-              getRowId={(e) => e.slug}
-              rows={}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              onCellClick={(e) => onClickCell(e)}
-              disableSelectionOnClick
-          />
-        </div> */}
+       
     
     <Button 
         style={{ marginLeft:10,marginTop:20, height: 30, background: '#F0F8FF'}} 

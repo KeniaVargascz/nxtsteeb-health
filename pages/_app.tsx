@@ -14,6 +14,7 @@ import Stack from '@material-ui/core/Stack';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 const es = {
+  noFoods: '-',
   exist: 'Existentes',
   food_types: 'Tipos de comida',
   rest: 'Restaurantes',
@@ -40,6 +41,7 @@ const es = {
   err: 'Ocurrió un error, verifique los datos.'
 }
 const en = {
+  noFoods: '-',
   err: 'Error has ocurred. Verify the info.',
   type: 'Type',
   exist: 'Existence',
@@ -132,7 +134,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               </IconButton>
             </Stack>
               </div>
-              <div style={{marginLeft: 10, marginRight: 10, marginBottom: 15}}> 
+              <div style={{marginLeft: 10, marginRight: 25, marginBottom: 15}}> 
                 <Rest t = {t} language = {data} /> 
               </div>
               </Paper>
